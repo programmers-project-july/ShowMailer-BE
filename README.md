@@ -30,3 +30,15 @@ npm install typescript ts-node @types/node @types/express
   }
 }
 ```
+
+### 브런치 세팅
+dev브런치 아래에 하위 브런치를 생성하여 사용하시면 됩니다.
+
+1. 기능개발 = feat 태그를 사용합니다. ex : feat/#1-firestore -> firestore관련 기능 개발에 사용
+
+브런치 생성 후 작업 위치에서 터미널에
+``` git fetch ```
+``` git git checkout -t origin/feat/#1-firestore ```
+``` git branch ```
+브런치 변경 확인 후에 개발 진행하시면 됩니다.
+Readme 업데이트는 필요한 부분 계속하여 진행하시면 됩니다.

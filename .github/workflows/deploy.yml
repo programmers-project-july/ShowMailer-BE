@@ -19,7 +19,7 @@ jobs:
 
       - name: Add remote-url
         run: |
-          git remote add forked-repo https://chae-dahee:${{ secrets.AUTO_ACTIONS }}@github.com/chae-dahee/dev-alarm-BE
+          git remote add forked-repo https://chae-dahee:${{ secrets.AUTO_ACTIONS }}@github.com/chae-dahee/demo-BE
           git config user.name chae-dahee
           git config user.email ${{ secrets.EMAIL }}
       

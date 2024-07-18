@@ -10,6 +10,6 @@ const {
 // router.use(express.json());
 
 router.get("/", getCulturalEvents);
-router.get("/:id", getCulturalEventDetail);
+router.get("/:codename/:title/:date", getCulturalEventDetail);
 
 module.exports = router;

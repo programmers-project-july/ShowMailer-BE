@@ -5,55 +5,47 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const { API_KEY } = process.env;
-const BATCH_SIZE = 1000; // open api에서 1000개씩만 조회 가능하기 때문에 끊어서 조회
+const BATCH_SIZE = 10; // 한 페이지에 들어갈 공연 개수
 
-// 전체 데이터 조회
+// 전체 or 카테고리별 조회, 검색
+
+// codename 있으면 카테고리별 조회, 없으면 전체조회
+// title query 있으면 검색
 export const getCulturalEvents = async (
   req: Request,
   res: Response
 ): Promise<void> => {
+  const { codename, title } = req.query;
+  const page = parseInt(req.query.page as string, BATCH_SIZE) || 1; // 페이지 번호, 기본값 1
+  const startIndex = (page - 1) * BATCH_SIZE + 1;
+  const endIndex = page * BATCH_SIZE;
+
   try {
-    let startIndex = 1;
-    let endIndex = BATCH_SIZE;
-    let events = [];
-    let totalCount = 0;
+    const eventsUrl = `http://openapi.seoul.go.kr:8088/${API_KEY}/json/culturalEventInfo/${startIndex}/${endIndex}/${
+      codename || " "
+    }/${title || " "}`;
+    const response = await axios.get(eventsUrl);
 
-    // 첫 번째 호출로 전체 개수 가져오기
-    const eventslUrl = `http://openapi.seoul.go.kr:8088/${API_KEY}/json/culturalEventInfo/${startIndex}/${endIndex}`;
-    const initialResponse = await axios.get(eventslUrl);
-    if (initialResponse.data.culturalEventInfo.RESULT.CODE === "INFO-000") {
-      totalCount = initialResponse.data.culturalEventInfo.list_total_count;
-      events = events.concat(initialResponse.data.culturalEventInfo.row);
+    if (response.data.culturalEventInfo.RESULT.CODE === "INFO-000") {
+      const events = response.data.culturalEventInfo.row;
+      res.status(200).json(
+        events.map((event: any) => ({
+          title: event.TITLE,
+          image: event.MAIN_IMG,
+          codename: event.CODENAME,
+          date: event.DATE,
+        }))
+      );
+    } else {
+      res.status(404).send("No events found");
     }
-
-    // 나머지 데이터 가져오기 (+1000개씩 조회)
-    while (endIndex < totalCount) {
-      startIndex += BATCH_SIZE;
-      endIndex += BATCH_SIZE;
-      const apiUrl = `http://openapi.seoul.go.kr:8088/${API_KEY}/json/culturalEventInfo/${startIndex}/${endIndex}`;
-      const response = await axios.get(apiUrl);
-      if (response.data.culturalEventInfo.RESULT.CODE === "INFO-000") {
-        events = events.concat(response.data.culturalEventInfo.row);
-      }
-    }
-
-    // 전체 공연 개수 출력
-    console.log(`Total cultural events: ${totalCount}`);
-
-    res.status(200).json(
-      events.map((event: any) => ({
-        title: event.TITLE,
-        image: event.MAIN_IMG,
-        codename: event.CODENAME,
-        date: event.DATE,
-      }))
-    );
   } catch (error) {
     res.status(500).send("Error retrieving cultural events");
   }
 };
 
 // 공연 상세조회
+// 예시) http://localhost:3000/events/국악/서울시국악관현악단 제362회 정기연주회/2024-11-29~2024-11-29
 export const getCulturalEventDetail = async (
   req: Request,
   res: Response

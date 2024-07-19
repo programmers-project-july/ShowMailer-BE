@@ -5,13 +5,9 @@ const router = Router();
 const {
   getCulturalEvents,
   getCulturalEventDetail,
-  // searchCulturalEvents,
 } = require("../controllers/EventController");
 
-// router.use(express.json());
-
-router.get("/", getCulturalEvents);
-router.get("/:codename/:title/:date", getCulturalEventDetail);
-// router.get("/:codename/:title", searchCulturalEvents);
+router.get("/", getCulturalEvents); // 목록 조회, 검색
+router.get("/:codename/:title/:date", getCulturalEventDetail); // 상세정보
 
 module.exports = router;

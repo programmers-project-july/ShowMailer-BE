@@ -2,9 +2,18 @@
   "version": 2,
   "builds": [
     {
-      "src": "./src/app.ts",
+      "src": "app.ts",
       "use": "@vercel/node"
     }
   ],
-  "routes": [{ "src": "/[^.]+", "dest": "/", "status": 200 }]
+  "routes": [
+    {
+      "src": "/events/(.*)",
+      "dest": "/app.ts"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/app.ts"
+    }
+  ]
 }

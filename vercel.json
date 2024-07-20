@@ -2,23 +2,18 @@
   "version": 2,
   "builds": [
     {
-      "src": "src/app.ts",
+      "src": "app.ts",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
-      "src": "/events",
-      "dest": "/src/app.ts"
+      "src": "/events/(.*)",
+      "dest": "/app.ts"
     },
     {
-      "src": "/events/(.*)",
-      "dest": "/src/app.ts"
+      "src": "/(.*)",
+      "dest": "/app.ts"
     }
-  ],
-  "functions": {
-    "api/cron-job.js": {
-      "schedule": "0 9 * * *"
-    }
-  }
+  ]
 }

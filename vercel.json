@@ -1,8 +1,19 @@
 {
-  "rewrites": [
+  "version": 2,
+  "builds": [
     {
-      "source": "/events",
-      "destication": "https://demo-be-navy.vercel.app/events"
+      "src": "src/app.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/events",
+      "dest": "/src/routes/EventRoutes.ts"
+    },
+    {
+      "src": "/events/(.*)",
+      "dest": "/src/routes/EventRoutes.ts"
     }
   ]
 }

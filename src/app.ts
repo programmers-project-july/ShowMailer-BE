@@ -15,6 +15,8 @@ app.listen(process.env.PORT, function () {
 });
 
 const eventRouter = require("./routes/EventRoutes");
+const likeRouter = require("./routes/LikeRoutes");
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 app.use("/events", eventRouter);
+app.use("/likes", likeRouter);

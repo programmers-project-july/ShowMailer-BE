@@ -9,8 +9,8 @@ const {
 } = require("../controllers/LikeController");
 
 // Url을 어떻게 해야할지 고민
-router.post("/", addLike);
-router.delete("/", removeLike);
-router.get("/", getUserLikes);
+router.post("/add", addLike);
+router.delete("/remove", removeLike);
+router.get("/all", getUserLikes);
 
 module.exports = router;

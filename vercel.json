@@ -15,5 +15,10 @@
       "src": "/(.*)",
       "dest": "/app.ts"
     }
-  ]
+  ],
+  "functions": {
+    "api/cron-job.js": {
+      "schedule": "0 9 * * *"
+    }
+  }
 }

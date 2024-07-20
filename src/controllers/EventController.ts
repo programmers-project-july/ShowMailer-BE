@@ -44,7 +44,7 @@ export const getCulturalEvents = async (
   }
 };
 
-// 공연 상세조회
+// 공연 상세 조회
 // 예시) http://localhost:3000/events/국악/서울시국악관현악단 제362회 정기연주회/2024-11-29~2024-11-29
 export const getCulturalEventDetail = async (
   req: Request,

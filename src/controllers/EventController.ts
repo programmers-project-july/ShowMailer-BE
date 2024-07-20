@@ -5,7 +5,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const { API_KEY } = process.env;
-const BATCH_SIZE = 10; // 한 페이지에 들어갈 공연 개수
+const BATCH_SIZE = 8; // 한 페이지에 들어갈 공연 수
 
 // 전체 or 카테고리별 조회, 검색
 

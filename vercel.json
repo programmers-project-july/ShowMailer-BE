@@ -1,4 +1,3 @@
-
 {
   "version": 2,
   "builds": [
@@ -9,12 +8,12 @@
   ],
   "routes": [
     {
-      "src": "/events/(.*)",
-      "dest": "/app.ts"
+      "src": "/events",
+      "dest": "/src/app.ts"
     },
     {
-      "src": "/(.*)",
-      "dest": "/app.ts"
+      "src": "/events/(.*)",
+      "dest": "/src/app.ts"
     }
   ]
 }

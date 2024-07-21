@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "commonjs",
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "strict": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true //이거 추가해야 json 읽을 수 있다고 함.
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}

@@ -1,9 +1,6 @@
 import { Request, Response } from "express";
 import axios from "axios";
 
-const dotenv = require("dotenv");
-dotenv.config();
-
 const API_KEY = process.env.API_KEY;
 const BATCH_SIZE = 8; // 한 페이지에 들어갈 공연 수
 
@@ -44,7 +41,7 @@ export const getCulturalEvents = async (
   }
 };
 
-// 공연 상세조회
+// 공연 상세 조회
 // 예시) http://localhost:3000/events/국악/서울시국악관현악단 제362회 정기연주회/2024-11-29~2024-11-29
 export const getCulturalEventDetail = async (
   req: Request,

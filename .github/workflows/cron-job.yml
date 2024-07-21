@@ -1,0 +1,14 @@
+name: Scheduled Cron Job
+
+on:
+  schedule:
+    - cron: "0 9 * * *" # 매일 오전 9시에 실행
+
+jobs:
+  call-vercel-api:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Call Vercel API
+        run: |
+          curl -X POST https://us-central1-dev-alarm.cloudfunctions.net/sendEmailNotification

@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "src/app.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/events",
+      "dest": "/src/app.ts"
+    },
+    {
+      "src": "/events/(.*)",
+      "dest": "/src/app.ts"
+    },
+    {
+      "src": "/likes",
+      "dest": "/src/app.ts"
+    },
+    {
+      "src": "/likes/(.*)",
+      "dest": "/src/app.ts"
+    },
+    {
+      "src": "/api-docs",
+      "dest": "/src/app.ts"
+    }
+  ]
+}

@@ -4,8 +4,8 @@ import axios from "axios";
 const dotenv = require("dotenv");
 dotenv.config();
 
-const { API_KEY } = process.env;
-const BATCH_SIZE = 8; // 한 페이지에 들어갈 공연 개수
+const API_KEY = process.env.API_KEY;
+const BATCH_SIZE = 8; // 한 페이지에 들어갈 공연 수
 
 // 전체 or 카테고리별 조회, 검색
 

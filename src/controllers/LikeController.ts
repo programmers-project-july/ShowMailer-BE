@@ -85,7 +85,7 @@ export const getUserLikes = async (
 
     if (likes) {
       const likeList = Object.values(likes);
-      console.log(likeList);
+      // console.log(likeList);
       res.status(200).send(likeList);
     } else {
       res.status(200).send("No likes found");

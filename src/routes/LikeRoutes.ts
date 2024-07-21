@@ -11,7 +11,7 @@ const {
 // Url을 어떻게 해야할지 고민
 router.post("/add", addLike);
 router.delete("/remove", removeLike);
-router.get("/all", getUserLikes);
+router.get("/", getUserLikes);
 router.get("/check", checkLike);
 
 module.exports = router;

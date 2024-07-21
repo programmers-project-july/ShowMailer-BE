@@ -15,7 +15,7 @@ const eventRouter = require("./routes/EventRoutes");
 const likeRouter = require("./routes/LikeRoutes");
 
 app.use("/events", eventRouter);
-app.use("/likes", likeRouter)
+app.use("/likes", likeRouter);
 
 // 기본 라우트
 app.get("/", (req, res) => {

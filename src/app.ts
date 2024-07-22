@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const express = require("express");
+const cors = require("cors");
 
 // swagger setting
 const swaggerUi = require("swagger-ui-express");
@@ -16,15 +17,22 @@ const likeRouter = require("./routes/LikeRoutes");
 
 // app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
-const options = {
-  customCssUrl:
-    "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.18.3/swagger-ui.css",
+// const options = {
+//   customCssUrl:
+//     "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.18.3/swagger-ui.css",
+// };
+
+const corsOptions = {
+  origin: "https://dev-alarm-fe.vercel.app", // 프론트엔드 도메인
+  optionsSuccessStatus: 200,
 };
+app.use(cors(corsOptions));
+
 const spec = JSON.parse(
   // fs.readFileSync(path.join(__dirname, "../petstore-api.json"), "utf8")
   fs.readFileSync(path.join(__dirname, "./swagger/swagger-output.json"), "utf8")
 );
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(spec, options));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(spec));
 
 app.use("/events", eventRouter);
 app.use("/likes", likeRouter);

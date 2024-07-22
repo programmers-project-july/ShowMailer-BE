@@ -7,7 +7,7 @@
   },
   "host": "demo-be-navy.vercel.app",
   "basePath": "/",
-  "schemes": ["https"],
+  "schemes": ["http", "https"],
   "tags": [
     {
       "name": "Events",
@@ -90,7 +90,7 @@
         "description": "공연에 좋아요를 추가합니다.",
         "parameters": [
           {
-            "name": "body",
+            "name": "like",
             "in": "body",
             "schema": {
               "type": "object",
@@ -132,7 +132,7 @@
         "description": "공연에 추가된 좋아요를 삭제합니다.",
         "parameters": [
           {
-            "name": "body",
+            "name": "like",
             "in": "body",
             "schema": {
               "type": "object",
@@ -177,10 +177,17 @@
         "description": "사용자의 좋아요 목록을 조회합니다.",
         "parameters": [
           {
-            "name": "email",
-            "in": "query",
-            "type": "string",
-            "description": "사용자의 이메일 주소"
+            "name": "like",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "showmailer@example.com"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -200,28 +207,29 @@
         "description": "특정 공연에 사용자가 좋아요를 눌렀는지 확인합니다.",
         "parameters": [
           {
-            "name": "email",
-            "in": "query",
-            "type": "string",
-            "description": "사용자의 이메일 주소"
-          },
-          {
-            "name": "codename",
-            "in": "query",
-            "type": "string",
-            "description": "분류"
-          },
-          {
-            "name": "title",
-            "in": "query",
-            "type": "string",
-            "description": "공연/행사명"
-          },
-          {
-            "name": "date",
-            "in": "query",
-            "type": "string",
-            "description": "날짜/시간"
+            "name": "like",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "showmailer@example.com"
+                },
+                "codename": {
+                  "type": "string",
+                  "example": "국악"
+                },
+                "title": {
+                  "type": "string",
+                  "example": "서울시국악관현악단 실내악 시리즈 Ⅱ"
+                },
+                "date": {
+                  "type": "string",
+                  "example": "2024-10-25~2024-10-25"
+                }
+              }
+            }
           }
         ],
         "responses": {

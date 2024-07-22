@@ -6,14 +6,12 @@ const swaggerFile = require("./swagger/swagger-output.json");
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Swagger UI 설정
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
-
 app.use(express.json());
 
 const eventRouter = require("./routes/EventRoutes");
 const likeRouter = require("./routes/LikeRoutes");
 
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 app.use("/events", eventRouter);
 app.use("/likes", likeRouter);
 

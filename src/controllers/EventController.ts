@@ -26,14 +26,16 @@ export const getCulturalEvents = async (
     if (response.data.culturalEventInfo.RESULT.CODE === "INFO-000") {
       const events = response.data.culturalEventInfo.row;
       res.status(200).json(
-        events.map((event: any) => ({
-          title: event.TITLE,
-          image: event.MAIN_IMG,
-          codename: event.CODENAME,
-          date: event.DATE,
-          place: event.PLACE,
-          org_link: event.ORG_LINK,
-        }))
+        events.length > 0
+          ? events.map((event: any) => ({
+              title: event.TITLE,
+              image: event.MAIN_IMG,
+              codename: event.CODENAME,
+              date: event.DATE,
+              place: event.PLACE,
+              org_link: event.ORG_LINK,
+            }))
+          : []
       );
     } else {
       res.status(404).send("No events found");

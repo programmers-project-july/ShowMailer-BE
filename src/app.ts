@@ -15,7 +15,7 @@ const eventRouter = require("./routes/EventRoutes");
 const likeRouter = require("./routes/LikeRoutes");
 
 const corsOptions = {
-  origin: "https://dev-alarm-fe.vercel.app", // 프론트엔드 도메인
+  origin: ["https://dev-alarm-fe.vercel.app", "http://localhost:5173"], // 프론트엔드 도메인
   credentials: true, // 자격 증명 허용
 };
 

@@ -26,6 +26,10 @@
     {
       "src": "/api-docs",
       "dest": "/src/app.ts"
+    },
+    {
+      "src": "/api-docs/(.*)",
+      "dest": "/src/app.ts"
     }
   ]
 }

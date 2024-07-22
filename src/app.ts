@@ -1,7 +1,7 @@
 const express = require("express");
 // swagger setting
 const swaggerUi = require("swagger-ui-express");
-const swaggerFile = require("../swagger/swagger-output.json");
+const swaggerFile = require("./swagger/swagger-output.json");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -17,10 +17,10 @@ const likeRouter = require("./routes/LikeRoutes");
 app.use("/events", eventRouter);
 app.use("/likes", likeRouter);
 
-// 기본 라우트
-app.get("/", (req: any, res: any) => {
-  res.send("Welcome to the Express server!");
-});
+// // 기본 라우트
+// app.get("/", (req: any, res: any) => {
+//   res.send("Welcome to the Express server!");
+// });
 
 // 서버 시작
 app.listen(port, () => {

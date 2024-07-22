@@ -31,6 +31,10 @@ export const getCulturalEvents = async (
           image: event.MAIN_IMG,
           codename: event.CODENAME,
           date: event.DATE,
+          place: event.PLACE,
+          use_trgt: event.USE_TRGT,
+          use_fee: event.USE_FEE,
+          org_link: event.ORG_LINK,
         }))
       );
     } else {

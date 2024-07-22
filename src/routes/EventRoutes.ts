@@ -8,6 +8,5 @@ const {
 } = require("../controllers/EventController");
 
 router.get("/", getCulturalEvents); // 목록 조회, 검색
-router.get("/:codename/:title/:date", getCulturalEventDetail); // 상세정보
 
 module.exports = router;

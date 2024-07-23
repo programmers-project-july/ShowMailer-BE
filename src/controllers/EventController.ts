@@ -1,6 +1,9 @@
 import { Request, Response } from "express";
 import axios from "axios";
 
+const dotenv = require("dotenv");
+dotenv.config();
+
 const API_KEY = process.env.API_KEY;
 const BATCH_SIZE = 8; // 한 페이지에 들어갈 공연 수
 

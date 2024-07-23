@@ -6,6 +6,9 @@ const cors = require("cors");
 // swagger setting
 const swaggerUi = require("swagger-ui-express");
 
+const dotenv = require("dotenv");
+dotenv.config();
+
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -26,7 +29,6 @@ const swaggerOptions = {
     "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.18.3/swagger-ui.css",
 };
 const spec = JSON.parse(
-  // fs.readFileSync(path.join(__dirname, "../petstore-api.json"), "utf8")
   fs.readFileSync(path.join(__dirname, "./swagger/swagger-output.json"), "utf8")
 );
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(spec, swaggerOptions));

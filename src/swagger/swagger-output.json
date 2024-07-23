@@ -7,7 +7,7 @@
   },
   "host": "demo-be-navy.vercel.app",
   "basePath": "/",
-  "schemes": ["http", "https"],
+  "schemes": ["https"],
   "tags": [
     {
       "name": "Events",
@@ -52,7 +52,7 @@
         ],
         "responses": {
           "200": {
-            "description": "성공적으로 조회되었습니다.",
+            "description": "성공적으로 조회되었습니다. 검색 결과가 있는 경우, 결과 데이터 배열을 반환합니다. 검색 결과가 없는 경우, 빈 배열을 반환합니다.",
             "schema": {
               "type": "array",
               "items": {
@@ -73,12 +73,6 @@
                 }
               }
             }
-          },
-          "404": {
-            "description": "찾을 수 없음"
-          },
-          "500": {
-            "description": "내부 서버 오류"
           }
         }
       }

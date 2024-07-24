@@ -8,10 +8,9 @@ const {
   checkLike,
 } = require("../controllers/LikeController");
 
-// Url을 어떻게 해야할지 고민
 router.post("/add", addLike);
 router.delete("/remove", removeLike);
-router.get("/", getUserLikes);
 router.get("/check", checkLike);
+router.get("/", getUserLikes);
 
 module.exports = router;

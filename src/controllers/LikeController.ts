@@ -82,7 +82,7 @@ export const getUserLikes = async (
   req: Request,
   res: Response
 ): Promise<void> => {
-  const { email } = req.body;
+  const { email } = req.query;
   const encodedEmail = encodeEmail(email as string);
 
   try {
@@ -105,14 +105,14 @@ export const getUserLikes = async (
 
 // 해당 게시물에 이 유저가 좋아요 눌렀는지 확인 true, false
 export const checkLike = async (req: Request, res: Response): Promise<void> => {
-  const { email, codename, title, date } = req.body as Like;
-  const encodedEmail = encodeEmail(email);
+  const { email, codename, title, date } = req.query;
+  const encodedEmail = encodeEmail(email as string);
 
   try {
     const likesRef = db.ref(`likes/${encodedEmail}`);
     const snapshot = await likesRef
       .orderByChild("codename")
-      .equalTo(codename)
+      .equalTo(codename as string)
       .once("value");
 
     const likes = snapshot.val();

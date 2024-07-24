@@ -9,7 +9,7 @@ const encodeEmail = (email: string): string => {
 
 // 좋아요 추가
 export const addLike = async (req: Request, res: Response): Promise<void> => {
-  const { email, codename, title, date } = req.body as Like;
+  const { email, codename, title, date, image } = req.body as Like;
   const encodedEmail = encodeEmail(email);
 
   try {
@@ -20,6 +20,7 @@ export const addLike = async (req: Request, res: Response): Promise<void> => {
       codename,
       title,
       date,
+      image,
     });
 
     console.log("Like added: ", req.body);

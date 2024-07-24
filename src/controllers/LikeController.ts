@@ -4,7 +4,7 @@ import { db } from "../config/firebase";
 
 // 이메일을 Firebase 경로에 안전한 문자열로 변환하는 함수
 const encodeEmail = (email: string): string => {
-  return email.replace(/\./g, ",");
+  return email?.replace(/\./g, ",");
 };
 
 // 좋아요 추가
@@ -59,10 +59,17 @@ export const removeLike = async (
         await likesRef.child(likeKey).remove();
         res.status(200).send("Like removed successfully");
       } else {
-        res.status(404).send("Like not found");
+        console.log("Like not found with the specified details:", {
+          email,
+          codename,
+          title,
+          date,
+        });
+        res.status(204).send("Like not found");
       }
     } else {
-      res.status(404).send("Like not found");
+      console.log("No likes found with codename:", codename);
+      res.status(204).send("Like not found");
     }
   } catch (error) {
     console.error("Error removing like: ", error);
@@ -85,10 +92,10 @@ export const getUserLikes = async (
 
     if (likes) {
       const likeList = Object.values(likes);
-      // console.log(likeList);
+      console.log(likeList);
       res.status(200).send(likeList);
     } else {
-      res.status(200).send("No likes found");
+      res.status(204).send("No likes found");
     }
   } catch (error) {
     console.error("Error retrieving likes: ", error);

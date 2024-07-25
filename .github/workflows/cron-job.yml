@@ -2,7 +2,7 @@ name: Scheduled Cron Job
 
 on:
   schedule:
-    - cron: "0 9 * * *" # 매일 오전 9시에 실행
+    - cron: "0 0 * * *" # 매일 한국 시간 오전 9시에 실행 (UTC 기준으로 오전 0시)
 
 jobs:
   call-vercel-api:

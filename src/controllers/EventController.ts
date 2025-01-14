@@ -1,7 +1,5 @@
 import { Request, Response } from "express";
 import axios from "axios";
-import sharp from "sharp";
-import path from "path";
 
 const API_KEY = process.env.API_KEY;
 const BATCH_SIZE = 8; // 한 페이지에 들어갈 공연 수
@@ -61,48 +59,16 @@ export const getCulturalEvents = async (
 
     if (response.data.culturalEventInfo.RESULT.CODE === "INFO-000") {
       const events = response.data.culturalEventInfo.row;
-
-      // WebP 변환
-      const eventsWithWebPImages = await Promise.all(
-        events.map(async (event: any) => {
-          const imageUrl = event.MAIN_IMG;
-          const webpImageFileName = `${event.TITLE.replace(/\s+/g, "_")}.webp`;
-          const webpImagePath = path.join(
-            __dirname,
-            "webp_images",
-            webpImageFileName
-          );
-
-          const imageResponse = await axios.get(imageUrl, {
-            responseType: "arraybuffer",
-          });
-
-          await sharp(imageResponse.data)
-            .webp({ quality: 80 })
-            .toFile(webpImagePath);
-
-          return {
-            title: event.TITLE,
-            image: webpImagePath,
-            codename: event.CODENAME,
-            date: event.DATE,
-            place: event.PLACE,
-            org_link: event.ORG_LINK,
-          };
-        })
+      res.status(200).json(
+        events.map((event: any) => ({
+          title: event.TITLE,
+          image: event.MAIN_IMG,
+          codename: event.CODENAME,
+          date: event.DATE,
+          place: event.PLACE,
+          org_link: event.ORG_LINK,
+        }))
       );
-
-      res.status(200).json(eventsWithWebPImages);
-      // res.status(200).json(
-      //   events.map((event: any) => ({
-      //     title: event.TITLE,
-      //     image: event.MAIN_IMG,
-      //     codename: event.CODENAME,
-      //     date: event.DATE,
-      //     place: event.PLACE,
-      //     org_link: event.ORG_LINK,
-      //   }))
-      // );
     } else {
       res.status(200).send([]);
     }

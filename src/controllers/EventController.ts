@@ -62,7 +62,7 @@ export const getCulturalEvents = async (
     if (response.data.culturalEventInfo.RESULT.CODE === "INFO-000") {
       const events = response.data.culturalEventInfo.row;
 
-      // WebP 변환을 위한 프로미스 배열 생성
+      // WebP 변환
       const eventsWithWebPImages = await Promise.all(
         events.map(async (event: any) => {
           const imageUrl = event.MAIN_IMG;
